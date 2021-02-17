@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import django_heroku
 
 # configurations for the PostGIS Extension in the Postgresql Database
 
@@ -184,3 +185,5 @@ LOGIN_URL = 'login'
 
 # SummerNote theme
 SUMMERNOTE_THEME = 'bs4'
+
+django_heroku.settings(locals())
