@@ -12,7 +12,7 @@ urlpatterns = [
     path('covid-19/search/', COVIDResultsView.as_view(), name='covid-results'),
     path('covid-19/news/', NewsListView.as_view(), name='news-home'),
     path('covid-19/news/<slug:slug>/', NewsDetailView.as_view(), name='news-detail'),
-    path('provinces/', views.provinces, name='province'),
-    path('incidents/', views.incidents, name='incidents'),
+    # path('provinces/', views.provinces, name='province'),
+    # path('incidents/', views.incidents, name='incidents'),
     # path('collector/',)
 ]

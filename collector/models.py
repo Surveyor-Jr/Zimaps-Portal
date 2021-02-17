@@ -1,11 +1,13 @@
 from __future__ import unicode_literals
 from django.db import models
-from django.contrib.gis.db import models
-from django.db.models import Manager as GeoManager
+# from django.contrib.gis.db import models
+# from django.db.models import Manager as GeoManager
 from django.urls import reverse 
 from django.utils import timezone
 from django.template.defaultfilters import slugify 
 
+'''
+***NOT USING POSTGRESQL FOR NOW***
 class Incidents(models.Model):
     name = models.CharField(max_length=20)
     location = models.PointField(srid=4396)
@@ -54,6 +56,8 @@ class Districts(models.Model):
 
     class Meta:
         verbose_name_plural = 'Districts'
+
+'''
 
 class Category(models.Model):
     name = models.CharField(max_length=30)

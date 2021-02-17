@@ -1,7 +1,7 @@
 from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from django.core.serializers import serialize
+# from django.core.serializers import serialize
 from django.http import HttpResponse
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -13,7 +13,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-from .models import COVID, Incidents, News, Provinces, Map
+from .models import COVID, News,  Map
 
 class MapListView(ListView):
     model = Map
@@ -66,6 +66,11 @@ class NewsListView(ListView):
 class NewsDetailView(DetailView):
     model = News
 
+
+"""
+
+**** for PostgreSQL****
+
 def provinces(request):
     province = serialize('geojson', Provinces.objects.all())
     return HttpResponse(province, content_type='json')
@@ -73,3 +78,5 @@ def provinces(request):
 def incidents(request):
     incident = serialize('geojson', Incidents.objects.all())
     return HttpResponse(incident, content_type='json')
+
+"""

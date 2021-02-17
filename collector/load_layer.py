@@ -1,3 +1,4 @@
+"""
 import os
 from django.contrib.gis.utils import LayerMapping
 from .models import Provinces, Districts
@@ -41,3 +42,4 @@ district_shp = os.path .abspath(os.path.join(os.path.dirname(__file__), 'data/ZW
 def district_import(verbose=True):
     lm = LayerMapping(Districts, district_shp, districts_mapping, transform=False, encoding='iso-8859-1')
     lm.save(strict=True, verbose=verbose)
+"""

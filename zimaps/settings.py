@@ -11,20 +11,23 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # configurations for the PostGIS Extension in the Postgresql Database
 
-import os
-if os.name == 'nt':
-    import platform
-    OSGEO4W = r"C:\OSGeo4W"
-    if '64' in platform.architecture()[0]:
-        OSGEO4W += "64"
-    assert os.path.isdir(OSGEO4W), "Directory does not exist: " + OSGEO4W
-    os.environ['OSGEO4W_ROOT'] = OSGEO4W
-    os.environ['GDAL_DATA'] = OSGEO4W + r"\share\gdal"
-    os.environ['PROJ_LIB'] = OSGEO4W + r"\share\proj"
-    os.environ['PATH'] = OSGEO4W + r"\bin;" + os.environ['PATH']
+ 
+#import os
+#if os.name == 'nt':
+#    import platform
+#    OSGEO4W = r"C:\OSGeo4W"
+#    if '64' in platform.architecture()[0]:
+#        OSGEO4W += "64"
+#    assert os.path.isdir(OSGEO4W), "Directory does not exist: " + OSGEO4W
+#    os.environ['OSGEO4W_ROOT'] = OSGEO4W
+ #   os.environ['GDAL_DATA'] = OSGEO4W + r"\share\gdal"
+ #   os.environ['PROJ_LIB'] = OSGEO4W + r"\share\proj"
+   # os.environ['PATH'] = OSGEO4W + r"\bin;" + os.environ['PATH']
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -51,10 +54,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.gis',
+    # 'django.contrib.gis',
     'users.apps.UsersConfig',
     'crispy_forms',
-    'leaflet',
+    # 'leaflet',
     'collector',
     'django_summernote', 
 ]
@@ -92,7 +95,8 @@ WSGI_APPLICATION = 'zimaps.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
+"""
+********for PostgreSQL Database*****
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
@@ -103,7 +107,15 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+"""
 
+# Temporary SQLite Database for now 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -151,7 +163,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 # allows to load iframe from same hostname 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-
+"""
 # configurations for Leaflet Maps
 LEAFLET_CONFIG = {
     'DEFAULT_CENTER': (-19.0154, 29.1549), 
@@ -161,6 +173,7 @@ LEAFLET_CONFIG = {
     'SCALE': 'both',
     'ATTRIBUTION_PREFIX': 'SurveyorJr'
 }
+"""
 
 # Crispy-Forms Configuration
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
