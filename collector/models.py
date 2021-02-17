@@ -85,7 +85,7 @@ class Map(models.Model):
     embed_type = models.CharField(choices=EMBED_CHOICES, max_length=50, null=True, blank=True)
     link = models.TextField(help_text="Paste the embedding code depending on the platform on which the map is hosted on.", verbose_name="URL", max_length=1000)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True) 
+    # author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True) =>to be fixated within a new database
 
     def __str__(self):
         return self.name

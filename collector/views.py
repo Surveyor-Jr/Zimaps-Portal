@@ -21,6 +21,7 @@ class MapListView(ListView):
     template_name = 'index.html'
     context_object_name = 'maps'
     paginate_by = 10 # display 10 results on a single page
+    ordering = '-name'
 
 class MapDetailView(DetailView):
     model = Map
@@ -29,6 +30,7 @@ class MapResultsView(ListView):
     model = Map
     template_name = 'collector/map_results.html'
     paginate_by = 10 # display 10 results on a single page
+    ordering = '-name'
 
     def get_queryset(self):
         query = self.request.GET.get('map')
@@ -40,20 +42,24 @@ class MapCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     fields = ['name', 'description', 'embed_type', 'link', 'category']
     success_message = "The map has been successfully added to the portal."
 
+"""
     def form_valid(self, form):
-        form.instance.author = self.request.user
+        form.instance.author = self.request.user            ==>To be activated when new DB enabled
         return super().form_valid(form)
+"""
 
 class COVIDListView(ListView):
     model = COVID
     template_name = 'covid/home.html'
     context_object_name = 'covid'
     paginate_by = 10
+    ordering = '-name'
 
 class COVIDResultsView(ListView):
     model = COVID
     template_name = 'collector/covid_results.html'
     paginate_by = 10
+    ordering = '-name'
 
     def get_queryset(self):
         query = self.request.GET.get('covid_resource')
@@ -67,6 +73,7 @@ class NewsListView(ListView):
     model = News
     context_object_name = 'news'
     paginate_by = 10
+    ordering = '-title'
 
 class NewsDetailView(DetailView):
     model = News

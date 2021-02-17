@@ -6,11 +6,11 @@
 {% for map in object_list %}
 <div class="card mb-4">
   <div class="card-body">
-    <h5 class="card-title">{{ map.name }}</h5>
+    <h5 class="card-title">{{ covid.name }}</h5>
     <p class="card-text">
-      {{ map.description }}
+      {{ covid.description }}
     </p>
-    <a href="{% url 'map-detail' map.slug %}" class="btn btn-primary">View</a>
+    <a href="{% url 'covid-resource-detail' covid.slug %}" class="btn btn-primary">View</a>
   </div>
 </div>
 {% endfor %}
