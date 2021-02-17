@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- if there is a muching word within the search -->
+{% if object_list %}
+{% for map in object_list %}
+<div class="card mb-4">
+  <div class="card-body">
+    <h5 class="card-title">{{ map.name }}</h5>
+    <p class="card-text">
+      {{ map.description }}
+    </p>
+    <a href="{% url 'map-detail' map.slug %}" class="btn btn-primary">View</a>
+  </div>
+</div>
+{% endfor %}
+<!-- Pagination buttons start -->
+{% if is_paginated %}
+
+        {% if page_obj.has_previous %}
+        <a name="First" id="First" class="btn btn-default" href="?page=1" role="button">First</a>
+        <a name="Previous" id="Previous" class="btn btn-default" href="?page={{ page_obj.previous_page_number }}" role="button">Previous</a>        
+        {% endif %}
+            
+        {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+        <a name="" id="" class="btn btn-info mb-4" href="?page={{ num }}" role="button">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        <a name="" id="" class="btn btn-default mb-4" href="?page={{ num }}" role="button">{{ num }}</a>
+        {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+        <a name="" id="" class="btn btn-primary mb-4" href="#" role="button">Next</a>
+        <a name="" id="" class="btn btn-default mb-4" href="?page={{ page_obj.paginator.num_pages }}" role="button">Last</a>
+        {% endif %}
+
+    {% endif %}
+<!-- Pagination buttons end -->
+<!-- If there is no much case within the search -->
+{% else %}
+<h3 style="color: rgb(248, 62, 62)">OOPS! NO RESULTS FOUND!</h3>
+<p>
+    <div class="alert alert-info" role="alert">
+        <strong>The mappers could have forgotten that one out.</strong>
+    </div> 
+</p>
+<div class="card">
+    <div class="card-body">
+        Would you be interested in adding the map to the platform? Or Add the name of the map 
+        to the <a href="#">bucketlist</a>? (Someone might see it & take action)
+    </div>
+</div>
+<div>
+    <hr>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+            <h4>Add It</h4>
+          <p class="card-text">
+            If the map already exists, or you might be the original owner of it, you can simply add it to the platform and help others find it aswell. 
+            All credits to you
+          </p>
+          <a href="{% url 'add-map' %}" class="btn btn-success">Add Map</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+            <h4>List It</h4>
+          <p class="card-text">
+            When you add to-list, mappers on this platform will be notified of the need and might take action in producing the required map.
+          </p>
+          <a href="#" class="btn btn-success">Add To-List</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+{% endblock content %}

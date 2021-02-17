@@ -1,0 +1,53 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ object.name }}</h5>
+          <div class="article-metadata">
+            In: <span class="badge bg-dark">{{ object.category }}</span><br />
+            Credits:
+            <span class="badge rounded-pill bg-info">Map Owner's Name</span>
+          </div>
+          <p class="card-text">{{ object.description }}</p>
+          <h3>Map Section</h3>
+          <!-- The map from the user comes here -->
+          {% if object.embed_type == "arcgis" %} 
+          {{ object.link|safe }}
+
+          {% elif object.embed_type == "google" %} 
+          {{ object.link|safe }} 
+
+          {% elif object.embed_type == "image" %}
+          <img src="{{ object.link }}" class="img-fluid" alt="..." />
+
+          {% elif object.embed_type == "openstreet" %}
+
+          <p>Open Street</p>
+          {{ object.link|safe }}  
+                   
+          {% else %}
+          <div class="alert alert-info" role="alert">
+            This map is only visible on your device therefore you need to click
+            on <strong>Download</strong> in order to view
+          </div>
+          <a
+            name="download"
+            id="download"
+            class="btn btn-primary mb-4"
+            href="{{ object.link }}"
+            role="button"
+            ><i class="fas fa-cloud-download-alt"></i> Download</a
+          >
+          <p>If you are having trouble downloading, kindly let us know</p>
+          {% endif %}
+          <!-- End of Embedded Map-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

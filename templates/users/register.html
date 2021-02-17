@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container mb-4">
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <span class="navbar-brand mb-0 h1">Create An Account Today</span>
+        </div>      
+      </nav>
+  </div>
+
+  <div class="alert alert-info" role="alert">
+     This application is currently in testing mode. We are not responsible for any loss of privacy. Register at your own risk
+  </div>
+
+<form method="POST">
+    {% csrf_token %}
+    <!-- Email input -->
+  <div class="form-group mb-4">
+    {{ form|crispy }}
+  </div>
+  
+  
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary btn-block mb-4">Sign up</button>
+  
+    <!-- Register buttons -->
+    <div class="text-center">
+      <p>Already have an Account? <a class="ml-2" href="{% url 'login' %}">Login</a></p>
+      <button type="button" class="btn btn-primary btn-floating mx-1">
+        <i class="fab fa-facebook-f"></i>
+      </button>
+  
+      <button type="button" class="btn btn-primary btn-floating mx-1">
+        <i class="fab fa-google"></i>
+      </button>
+  
+      <button type="button" class="btn btn-primary btn-floating mx-1">
+        <i class="fab fa-twitter"></i>
+      </button>
+  
+      <button type="button" class="btn btn-primary btn-floating mx-1">
+        <i class="fab fa-github"></i>
+      </button>
+    </div>
+  </form>
+
+{% endblock content %}

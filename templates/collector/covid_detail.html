@@ -1,0 +1,63 @@
+{% extends "covid/base.html" %} {% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ object.name }}</h5>
+          <hr />
+          <p class="card-text">{{ object.description }}</p>
+          <h3>Resource View</h3>
+          <!-- The map from the user comes here -->
+          {% if object.embed_type == "webapp" %}
+          <iframe
+            width="100%"
+            height="600"
+            frameborder="0"
+            scrolling="no"
+            allowfullscreen
+            src="{{ covid.link }}"
+          ></iframe>
+          {% elif object.embed_type == "webmap" %}
+          {{ object.link|safe }} 
+          {% elif object.embed_type == "dashboard" %}
+          <iframe
+            src="{{ covid.link }}"
+            width="100%"
+            height="600"
+            frameborder="0"
+          ></iframe>
+          <p>In case the Dashboard did not load correclty or you are having problems. Here is an <strong><a href="{{ covid.external_resource }}" target="_blank">external resource</a></strong></p>
+          {% elif object.embed_type == "survey123" %}
+          <p>The resource you have requested is for public data collection which can be used by Analysts and Decision makers
+            in Zimbabwe
+          </p>
+          <p><a name="" id="" class="btn btn-primary" href="{{ covid.link }}" target="_blank" role="button">Access Resource</a></p>
+          {% elif object.embed_type == "repository" %}
+          </i><i class="fab fa-github fa-4x"></i> 
+          <p>This resouce is currently hosted on GitHub </p>
+          <a name="github" id="github" class="btn btn-dark" href="{{ covid.link }}" target="_blank" role="button">View Repo</a>
+          {% else %}
+          <div class="alert alert-info" role="alert">
+            This resource is only visible on your device therefore you need to
+            click on <strong>Download</strong> in order to view
+          </div>
+          <a
+            name="download"
+            id="download"
+            class="btn btn-primary mb-4"
+            href="{{ object.link }}"
+            role="button"
+            ><i class="fas fa-cloud-download-alt"></i> Download</a
+          >
+          <p>If you are having trouble downloading, kindly let us know</p>
+          {% endif %}
+          <!-- End of Embedded Map-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

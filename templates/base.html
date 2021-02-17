@@ -1,0 +1,306 @@
+{% load static %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>ZiMaps </title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="https://blog.justlanded.com/wp-content/uploads/2018/01/zimbabwe-1758992_1280.png">
+    <!-- MDBootstrap CDN for the UI Kit -->
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="#">upgrade your browser</a> to improve your experience.
+      </p>
+    <![endif]-->
+
+    <!-- Navigation Bar Start -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+          <!-- Toggle button -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-mdb-toggle="collapse"
+            data-mdb-target="#navbarCenteredExample"
+            aria-controls="navbarCenteredExample"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+          <a class="navbar-brand" href="{% url 'home' %}">
+            <img
+              src="https://blog.justlanded.com/wp-content/uploads/2018/01/zimbabwe-1758992_1280.png"
+              height="30"
+              alt=""
+              loading="lazy"
+            />
+            ZiMaps Portal
+          </a>
+      
+          <!-- Collapsible wrapper -->
+          <div
+            class="collapse navbar-collapse justify-content-center"
+            id="navbarCenteredExample"
+          >
+            <!-- Left links -->
+            <ul class="navbar-nav mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'covid-home' %}">COVID-19</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Hire Someone</a>
+              </li>
+              
+              <!-- Navbar dropdown -->
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link active dropdown-toggle"
+                  href="#"
+                  id="navbarDropdown"
+                  aria-current="page"
+                  role="button"
+                  data-mdb-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  How-To-Guides
+                </a>
+                <!-- Dropdown menu -->
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">Find Maps</a></li>
+                  <li><a class="dropdown-item" href="#">Add Maps</a></li>
+                  <li><a class="dropdown-item" href="#">Create Maps</a></li>
+                  <li><a class="dropdown-item" href="https://github.com/Surveyor-Jr" target="_blank">Contribute <i class="fab fa-github"></i></a></li>
+                </ul>
+              </li>
+              
+            </ul>
+            <!-- Left links -->
+          </div>
+          <!-- Collapsible wrapper -->
+          <!-- Right elements -->
+    <ul class="navbar-nav flex-row">
+      {% if user.is_authenticated %}
+        <li class="nav-item me-3 me-lg-1 dropdown">
+          <a class="nav-link d-sm-flex align-items-sm-center" href="{% url 'profile' %}">
+            <img
+              src="https://ecossian-project.technikon.com/components/com_easyblog/assets/images/default_blogger.png"
+              class="rounded-circle"
+              height="22"
+              alt=""
+              loading="lazy"
+            />
+            <strong class="d-none d-sm-block ms-1">{{ user.username }}</strong>
+          </a>
+        </li>
+        {% else %}
+        <li class="nav-item me-3 me-lg-1">
+            <a class="btn btn-success" href="{% url 'login' %}" role="button">Login</a>
+        </li>
+        <li class="nav-item me-3 me-lg-1">
+            <a class="btn btn-primary" href="{% url 'register' %}" role="button">Register</a>
+        </li>
+        {% endif %}
+      <!-- Right elements -->
+        </div>
+        <!-- Container wrapper -->
+      </nav>
+
+      <!-- container -->
+        <div class="container-fluid">
+
+            <!-- Background image & Search Start -->
+  <div
+  class="p-5 text-center bg-image"
+  style="
+    background-image: url('https://mdbootstrap.com/img/new/slides/041.jpg');
+    height: 200px;
+    margin-top: 58px;
+  ">
+  <div class="mask" style="background-color: rgba(75, 62, 62, 0.6)">
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <div class="text-white">
+        <h5 class="mb-3">Looking for a map?</h5>
+        <!-- Search Button start -->
+        <div class="input-group">
+            <div class="form-outline">
+              <form class="navbar-form form-outline" method="GET" action="{% url 'map-results' %}">
+              <input id="search-focus" type="text" id="form1" name="map" class="form-control" />
+              <label class="form-label" for="form1">Search</label>
+            </div>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-search"></i>
+            </button>
+          </form>
+          </div>
+          <!-- Search Button End -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Background image & Search End -->
+        </div>
+<!-- container end -->
+
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-8">
+          {% if messages %}
+          <div class="card">
+            <div class="card-body">
+              {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}" role="alert">
+                 {{ message }}
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+           <!-- all content goes here -->
+           {% block content %}{% endblock %}
+           <!-- content here end -->
+        </div>
+        <!-- Side Bar Start -->
+        <div class="col-md-4">
+            <div class="content-section">
+                <nav class="navbar navbar-light bg-light">
+                    <div class="container-fluid">
+                      <span class="navbar-brand mb-0 h1">Quick Navigation</span>
+                    </div>
+                  </nav>
+                <p class='text-muted'>Here are some tools you can find on this portal
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-light"><h3>Categories</h3>
+                            <ul>
+                                <li>Health</li>
+                                <li>Political</li>
+                                <li>Social</li>
+                                <li>Religious</li>
+                                <li>Economic</li>
+                                <li>Emergency</li>
+                            </ul>
+                        </li>
+                        <li class="list-group-item list-group-item-light"><h3>Vacancies</h3>
+                          <ul>
+                              <li>Vacancy Here</li>                              
+                          </ul>
+                      </li>
+                      <li class="list-group-item list-group-item-light"><h3>BucketList</h3>
+                        <ul>
+                            <li>A list of maps that have been suggested by some users</li>                            
+                        </ul>
+                    </li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+        <!-- Side Bar End -->
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-light text-center text-lg-start">
+    <!-- Grid container -->
+    <div class="container p-4">
+      <!--Grid row-->
+      <div class="row">
+        <!--Grid column-->
+        <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+          <h5 class="text-uppercase">About</h5>
+  
+          <p>
+            ZiMaps portal is a place built by Zimbabweans for Zimbabweans to enable the searching & retrieval of any digital maps 
+            created by the community for public usage. Here one can find maps in both digital & downloadable format. 
+            It also acts as a place for spatial freelancers to showcase their work & get hired.
+          </p>
+        </div>
+        <!--Grid column-->
+  
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase">Important Links</h5>
+  
+          <ul class="list-unstyled mb-0">
+            <li>
+              <a href="https://africansurveyors.net" target="_blank" class="text-dark">Blog</a>
+            </li>
+            <li>
+              <a href="https://wa.me/263776887606" class="text-dark">Feedback</a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/kumbirai-matingo-6910a617a/" target="_blank" class="text-dark">Contributors</a>
+            </li>
+            <li>
+              <a href="https://wa.me/263776887606" target="_blank" class="text-dark">Support</a>
+            </li>
+          </ul>
+        </div>
+        <!--Grid column-->
+  
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase mb-0">Want To Learn?</h5>
+            <script src="https://apis.google.com/js/platform.js"></script>
+            <div class="g-ytsubscribe" data-channelid="UCse3CnS0Fyg8w53y6r00G3A" data-layout="full" data-count="hidden">
+
+            </div>
+            <hr>
+          <h5 class="text-uppercase mb-0">Social-Media</h5>
+  
+          <ul class="list-unstyled">
+           <i class="fab fa-facebook"></i>
+           <i class="fab fa-twitter"></i>
+           <i class="fab fa-youtube"></i>
+           <i class="fab fa-github"></i>
+           <i class="fab fa-linkedin"></i>
+          </ul>
+        </div>
+        <!--Grid column-->
+      </div>
+      <!--Grid row-->
+    </div>
+    <!-- Grid container -->
+  
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+      © 2021 Copyright:
+      <a class="text-dark" href="https://mdbootstrap.com/">African Surveyors Connect</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+
+
+    <!-- MDBootstrap CDN for the UI Kit [Javascript] -->
+    <!-- MDB -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.js"
+    ></script>
+  </body>
+</html>

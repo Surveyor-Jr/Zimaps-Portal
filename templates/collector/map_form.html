@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container">
+  <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">Add A Map </span>
+      </div>      
+    </nav>
+</div>
+
+<div class="card mb-4">
+  <div class="card-body"><mark>The details you fill out here will help others find this map. Please enter accurate information. If 
+    you are not sure please wait.</mark></div>
+</div>
+
+<form class="form-horizontal " method="POST">
+  {% csrf_token %}
+  <div class="form-group">
+    <div class="col-lg-10">
+      {{ form|crispy }}
+    </div>
+  </div>
+   <!-- Submit button -->
+   <br>
+   <div class="d-grid gap-2 col-6 mx-auto">
+    <button class="btn btn-primary" type="submit">Submit Map</button>
+  </div>
+   
+</form>
+
+{% endblock content %}

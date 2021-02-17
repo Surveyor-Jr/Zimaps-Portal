@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container mb-4">
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <span class="navbar-brand mb-0 h1">You have been Logged Out </span>
+        </div>      
+      </nav>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <p class="card-text">
+        Would you like to get into your account again?
+      </p>
+      <a name="Login" id="Login" class="btn btn-primary" href="{% url 'login' %}" role="button">Login again</a>
+    </div>
+  </div>
+
+
+{% endblock content %}

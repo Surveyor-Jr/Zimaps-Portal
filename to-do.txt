@@ -1,0 +1,13 @@
+13-Feb-2021
+
+    - search and replace the pk with slug [done]
+    - create an embed template that suits all embeded maps and dashboards within platform
+    -create the user application
+    -add the WYSIWYG editor
+    -allow the users to add maps with forms [done]
+    -create a profile page
+    -create helper pages & support pages
+    -after user adds map. give an alert success with the link so they can just copy it and view
+
+
+

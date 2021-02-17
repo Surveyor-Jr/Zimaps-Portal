@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container mb-4">
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <span class="navbar-brand mb-0 h1">Sign-In To Your Account </span>
+        </div>      
+      </nav>
+  </div>
+
+<form method="POST">
+    <!-- Email input -->
+    {% csrf_token %}
+    <div class="form-group mb-4">
+        {{ form|crispy }}
+    </div>
+  
+  
+    <!-- 2 column grid layout for inline styling -->
+    <div class="row mb-4">
+      <div class="col">
+        <!-- Simple link -->
+        <a href="#!">Forgot password?</a>
+      </div>
+    </div>
+  
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+  
+    <!-- Register buttons -->
+    <div class="text-center">
+      <p>Not a member? <a href="{% url 'register' %}">Register</a></p>
+      <p>or sign up with:</p>
+      <button type="button" class="btn btn-primary btn-floating mx-1">
+        <i class="fab fa-facebook-f"></i>
+      </button>
+  
+      <button type="button" class="btn btn-primary btn-floating mx-1">
+        <i class="fab fa-google"></i>
+      </button>
+  
+      <button type="button" class="btn btn-primary btn-floating mx-1">
+        <i class="fab fa-twitter"></i>
+      </button>
+  
+      <button type="button" class="btn btn-primary btn-floating mx-1">
+        <i class="fab fa-github"></i>
+      </button>
+    </div>
+  </form>
+
+{% endblock content %}
