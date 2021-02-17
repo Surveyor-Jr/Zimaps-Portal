@@ -42,7 +42,7 @@ SECRET_KEY = 'w)v1ishgniw(f+##x4mk5dr!jz6f+61c2&f^teau093e+90+ta'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['zimaps.herokuapp.com']
 
 
 # Application definition
