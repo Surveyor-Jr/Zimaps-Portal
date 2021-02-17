@@ -4,6 +4,7 @@ from django.db import models
 # from django.db.models import Manager as GeoManager
 from django.urls import reverse 
 from django.utils import timezone
+from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify 
 
 '''
@@ -84,7 +85,7 @@ class Map(models.Model):
     embed_type = models.CharField(choices=EMBED_CHOICES, max_length=50, null=True, blank=True)
     link = models.TextField(help_text="Paste the embedding code depending on the platform on which the map is hosted on.", verbose_name="URL", max_length=1000)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    # author = models.CharField(max_length=20) | to be activated after adding the user apps 
+    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True) 
 
     def __str__(self):
         return self.name

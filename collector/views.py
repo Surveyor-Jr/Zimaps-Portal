@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q 
+from django.contrib.auth.models import User
 from django.views.generic import (
     ListView,
     DetailView,
@@ -38,6 +39,10 @@ class MapCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Map
     fields = ['name', 'description', 'embed_type', 'link', 'category']
     success_message = "The map has been successfully added to the portal."
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
 class COVIDListView(ListView):
     model = COVID
