@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="card mb-4">
+    <div class="card-body">
+      <h5 class="card-title">Edit Your Profile {{ user.username }}</h5>
+    </div>
+  </div>
+
+  <div class="card text-center">
+    <div class="card-header">
+        <p><mark>You are about to edit your profile</mark></p>
+    </div>
+    <div class="card-body">
+      <!-- Editing Form -->
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group mb-4">
+            {{ u_form|crispy }}
+            {{ p_form|crispy }}
+        </div>
+      
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-4">Save Changes</button>
+        </form>
+    </div>
+  </div>
+
+{% endblock content %}

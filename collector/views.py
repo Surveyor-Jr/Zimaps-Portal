@@ -1,10 +1,10 @@
 from django.http.response import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView
 # from django.core.serializers import serialize
 from django.http import HttpResponse
 from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Q 
 from django.contrib.auth.models import User
 from django.views.generic import (
@@ -23,8 +23,53 @@ class MapListView(ListView):
     paginate_by = 10 # display 10 results on a single page
     ordering = '-name'
 
+class UserMapListView(ListView):
+    model = Map
+    template_name = 'collector/user_maps.html'
+    context_object_name = 'maps'
+    paginate_by = 10 # display 10 results on a single page
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Map.objects.filter(author=user).order_by('-name')
+
 class MapDetailView(DetailView):
     model = Map
+
+class MapCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Map
+    fields = ['name', 'description', 'embed_type', 'link', 'category']
+    success_message = "The map has been successfully added to the portal."
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user          
+        return super().form_valid(form)
+
+
+class MapUpdateView(LoginRequiredMixin, SuccessMessageMixin, UserPassesTestMixin, UpdateView):
+    model = Map
+    fields = ['name', 'description', 'embed_type', 'link']
+    success_message = "Your map details have been updated successfully."
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user    
+        return super().form_valid(form)
+
+    def test_func(self):
+        map = self.get_object()
+        if self.request.user == map.author:
+            return True
+        return False
+
+class MapDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Map   
+    success_url = '/'
+
+    def test_func(self):
+        map = self.get_object()
+        if self.request.user == map.author:
+            return True
+        return False 
 
 class MapResultsView(ListView):
     model = Map
@@ -36,17 +81,6 @@ class MapResultsView(ListView):
         query = self.request.GET.get('map')
         object_list = Map.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
         return object_list
-
-class MapCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
-    model = Map
-    fields = ['name', 'description', 'embed_type', 'link', 'category']
-    success_message = "The map has been successfully added to the portal."
-
-"""
-    def form_valid(self, form):
-        form.instance.author = self.request.user            ==>To be activated when new DB enabled
-        return super().form_valid(form)
-"""
 
 class COVIDListView(ListView):
     model = COVID

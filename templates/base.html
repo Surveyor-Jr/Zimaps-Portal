@@ -109,7 +109,7 @@
         <li class="nav-item me-3 me-lg-1 dropdown">
           <a class="nav-link d-sm-flex align-items-sm-center" href="{% url 'profile' %}">
             <img
-              src="https://ecossian-project.technikon.com/components/com_easyblog/assets/images/default_blogger.png"
+              src="{{ user.profile.image.url }}"
               class="rounded-circle"
               height="22"
               alt=""

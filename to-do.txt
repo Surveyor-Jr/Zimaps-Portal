@@ -1,13 +1,20 @@
 13-Feb-2021
 
     - search and replace the pk with slug [done]
-    - create an embed template that suits all embeded maps and dashboards within platform
-    -create the user application
-    -add the WYSIWYG editor
+    - create an embed template that suits all embeded maps and dashboards within platform [done]
+    -create the user application [done]
+    -add the WYSIWYG editor [done]
     -allow the users to add maps with forms [done]
-    -create a profile page
+    -create a profile page [done]
     -create helper pages & support pages
     -after user adds map. give an alert success with the link so they can just copy it and view
 
 
+18-Feb-2021
 
+    - function to delete previous image when new upload [done]
+    - set up .env file to store all environment variables [done]
+    - add google [done-with complications], twitter, github [done-no complications], facebook login system
+    - edit and enhance user profile capabilities
+    - create a freelancer app 
+    - create a resume app 

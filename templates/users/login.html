@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load socialaccount %}
 {% block content %}
 
 <div class="container mb-4">
@@ -11,7 +12,6 @@
   </div>
 
 <form method="POST">
-    <!-- Email input -->
     {% csrf_token %}
     <div class="form-group mb-4">
         {{ form|crispy }}
@@ -22,7 +22,7 @@
     <div class="row mb-4">
       <div class="col">
         <!-- Simple link -->
-        <a href="#!">Forgot password?</a>
+        <a href="{% url 'password-reset' %}">Forgot password?</a>
       </div>
     </div>
   
@@ -37,17 +37,17 @@
         <i class="fab fa-facebook-f"></i>
       </button>
   
-      <button type="button" class="btn btn-primary btn-floating mx-1">
+      <a type="button" href="{% provider_login_url 'google' %}" class="btn btn-primary btn-floating mx-1">
         <i class="fab fa-google"></i>
-      </button>
+      </a>
   
       <button type="button" class="btn btn-primary btn-floating mx-1">
         <i class="fab fa-twitter"></i>
       </button>
   
-      <button type="button" class="btn btn-primary btn-floating mx-1">
+      <a type="button" href="{% provider_login_url 'github' %}" class="btn btn-primary btn-floating mx-1">
         <i class="fab fa-github"></i>
-      </button>
+      </a>
     </div>
   </form>
 

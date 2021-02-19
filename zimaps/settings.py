@@ -13,6 +13,11 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 import django_heroku
+import environ
+
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()
 
 # configurations for the PostGIS Extension in the Postgresql Database
 
@@ -38,10 +43,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'w)v1ishgniw(f+##x4mk5dr!jz6f+61c2&f^teau093e+90+ta'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['zimaps.herokuapp.com']
 
@@ -60,7 +65,15 @@ INSTALLED_APPS = [
     'crispy_forms',
     # 'leaflet',
     'collector',
-    'django_summernote', 
+    'django_summernote',
+    # Social Login
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google', # Login via Google
+    'allauth.socialaccount.providers.github',
+    'django_cleanup.apps.CleanupConfig', # automatically clean-up old files when deleted
 ]
 
 MIDDLEWARE = [
@@ -187,3 +200,45 @@ LOGIN_URL = 'login'
 SUMMERNOTE_THEME = 'bs4'
 
 django_heroku.settings(locals())
+
+# setting up email 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "matingonk@gmail.com"  #replace this with your email
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD') 
+
+# Speicify the AuthBackends 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SITE_ID = 2
+
+# Enable Email scope to receive user's email address after successfull login
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
+
+SOCIALACCOUNT_PROVIDERS = {
+    'github': {
+        'SCOPE': [
+            'profile',
+            'email',
+            'username',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}

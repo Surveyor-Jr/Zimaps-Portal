@@ -7,10 +7,16 @@
         <div class="card-body">
           <h5 class="card-title">{{ object.name }}</h5>
           <div class="article-metadata">
-            In: <span class="badge bg-dark">{{ object.category }}</span><br />
+            Category: <span class="badge bg-dark">{{ object.category }}</span><br />
             Credits:
-            <span class="badge rounded-pill bg-info">{{ object.author }}</span>
+            <span class=""><strong><a href="{% url 'user-maps' map.author.username %}">{{ object.author }}</a></strong></span>
           </div>
+          {% if object.author == user %}
+          <div class="mt-2 mb-2">
+            <a name="" id="" class="btn btn-info" href="{% url 'map-update' object.slug %}" role="button">Update</a>
+            <a name="" id="" class="btn btn-danger" href="{% url 'map-delete' object.slug %}" role="button">Delete</a>
+          </div>
+          {% endif %}
           <p class="card-text">{{ object.description }}</p>
           <h3>Map Section</h3>
           <!-- The map from the user comes here -->

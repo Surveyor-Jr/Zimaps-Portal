@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <h2 class="navbar-brand mb-2 h1">Maps By {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h2>
+        </div>
+      </nav>
+</div>
+    
+<div class="container">
+    <div class="row">  
+      {% for map in maps %}    
+      <div class="col-lg-6">       
+        <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title">{{ map.name }}</h5>
+              <p class="card-text">
+                {{ map.description|truncatewords:15 }}
+              </p>
+              <a name="" id="" class="btn btn-primary" href="{% url 'map-detail' map.slug %}" role="button">View</a>
+            </div>
+          </div>
+      </div>      
+      {% endfor %}
+    </div> 
+    {% if is_paginated %}
+
+        {% if page_obj.has_previous %}
+        <a name="First" id="First" class="btn btn-default" href="?page=1" role="button">First</a>
+        <a name="Previous" id="Previous" class="btn btn-default" href="?page={{ page_obj.previous_page_number }}" role="button">Previous</a>        
+        {% endif %}
+            
+        {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+        <a name="" id="" class="btn btn-info mb-4" href="?page={{ num }}" role="button">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        <a name="" id="" class="btn btn-default mb-4" href="?page={{ num }}" role="button">{{ num }}</a>
+        {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+        <a name="" id="" class="btn btn-primary mb-4" href="#" role="button">Next</a>
+        <a name="" id="" class="btn btn-default mb-4" href="?page={{ page_obj.paginator.num_pages }}" role="button">Last</a>
+        {% endif %}
+
+    {% endif %}
+ </div>
+
+{% endblock content %}
