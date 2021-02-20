@@ -25,7 +25,9 @@
     <div class="card-body">
       <p class="card-title">EMAIL: {{ user.email }}</p>
       <p class="card-text">
-        With supporting text below as a natural lead-in to additional content.
+        {% for profile in profile %}
+        {{ profile.first_name }}
+        {% endfor %}
       </p>
       <a href="{% url 'profile-edit' %}" class="btn btn-dark">Edit Profile</a>
     </div>

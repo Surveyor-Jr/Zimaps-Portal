@@ -21,3 +21,6 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta: 
         model = Profile 
         fields = ['first_name', 'last_name', 'gender', 'date_of_birth', 'phone_number', 'twitter', 'facebook', 'linkedin', 'image']
+        widgets = {
+        'date_of_birth': forms.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),
+    }

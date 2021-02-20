@@ -38,6 +38,8 @@ urlpatterns = [
     path('profile/edit/', user_views.profile_edit, name='profile-edit'),
     path('accounts/', include('allauth.urls')),
     path('', include('collector.urls')),
+    # path('profile/', include('users.urls')),
+    path('careers/', include('careers.urls')),
     path('editor/', include('django_summernote.urls')),
 ]
 

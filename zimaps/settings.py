@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     # 'leaflet',
     'collector',
+    'careers',
     'django_summernote',
     # Social Login
     'django.contrib.sites',

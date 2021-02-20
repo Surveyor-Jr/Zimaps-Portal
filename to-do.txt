@@ -18,3 +18,7 @@
     - edit and enhance user profile capabilities
     - create a freelancer app 
     - create a resume app 
+
+20-Feb-2021
+
+    -add Biography field to profile model

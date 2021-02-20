@@ -1,0 +1,93 @@
+{% extends "careers/base.html" %}
+{% block content %}
+
+<div class="card mb-4">
+  <div class="card-body">
+    <h4 class="card-title">{{ object.name }}</h4>
+    <p class="card-text">
+      {{ object.intro }}
+    </p>
+    <p class="card-text">
+      <small class="text-muted">Offered By: {{ object.author }}</small>
+    </p>
+    <div class="card-footer text-muted">Starting At <i class="fas fa-dollar-sign"></i> {{ object.pricing }}</div>
+  </div>
+  <div class="text-center">
+  <img
+    src="{{ services.image.url }}"
+    class=""
+    height="300"
+    width="75%"
+    alt="services offered cover image"
+  />
+  </div>
+  <hr>
+  <h4 class="card-title">Service Detailed Info</h4>
+    <p class="card-text">
+      {{ object.detail }}
+    </p>
+</div>
+
+<h3 class="mb-4">About Service Provider</h3>
+
+<!-- Freelancers Profile/Bio Information -->
+
+<div class="card mb-3" style="max-width: 540px">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img
+        src="{{ object.author.image.url }}"
+        alt="Profile Picture"
+        class="img-fluid"
+      />
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ object.author }}</h5>        
+        <p class="card-text">
+          {{ object.author.bio }}
+        </p>
+        <p class="card-text">
+          <a name="" id="" class="btn btn-outline-primary" data-mdb-ripple-color="dark" href="#" role="button" data-mdb-toggle="modal"
+          data-mdb-target="#exampleModal">Contact Me</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Get-in-Touc</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-mdb-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p><i class="fas fa-phone"></i>: <i class="flag flag-zimbabwe"></i>+263-{{ object.author.phone_number }}</p>
+        <p><i class="far fa-envelope"></i>  {{ object.author.user.email }}</p>
+        <p><i class="fab fa-facebook-f">  <a href="{{ object.author.facebook }}" target="_blank" rel="noopener noreferrer">{{ object.author.facebook }}</a></i></p>
+        <p><i class="fab fa-linkedin-in"></i>  <a href="{{ object.author.linkedin }}" target="_blank" rel="noopener noreferrer">{{ object.author.linkedin }}</a></p>
+        <p><i class="fab fa-twitter"></i>  <a href="https://twitter.com/{{ object.author.twitter }}" target="_blank" rel="noopener noreferrer">{{ object.author.twitter }}</a></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-mdb-dismiss="modal">
+          Close
+        </button>
+        <a href="tel:{{ object.author.phone_number }}" type="button" class="btn btn-primary">Call Now<i class="fas fa-phone"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
