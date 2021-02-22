@@ -4,35 +4,34 @@
 <div class="container mb-4">
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-          <span class="navbar-brand mb-0 h1">Find A Service</span>
+          <span class="navbar-brand mb-0 h1">Services Offered by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</span>
         </div>
       </nav>
 </div>
 
-<div class="row row-cols-1 row-cols-md-3 g-4 mb-2">
-{% for service in services %}
-  <div class="col">
-    <div class="card">
-      <img
-        src="{{ service.image.url }}"
-        class="card-img-top"
-        alt="Service Cover Image"
-      />
-      <div class="card-body">
-        <h5 class="card-title"><a href="{% url 'service-detail' service.slug %}">{{ service.name }}</a></h5>
-        <p class="card-text">
-          {{ service.intro }}
-        </p>
-        <figcaption class="blockquote-footer">
-          <cite title="Source Title"><a href="{% url 'user-services' service.author.username %}">{{ service.author }}</a></cite>
-        </figcaption>
-        <div class="card-footer text-muted">Starting At <i class="fas fa-dollar-sign"></i> {{ service.pricing }}</div>   
-    </div>
-    </div>
-  </div>
-{% endfor %} 
-  
-</div>
+<table class="table">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Brief</th>
+        <th scope="col">Price</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for service in services %}
+      <tr>
+        <th scope="row"><i class="fas fa-toolbox"></i>
+        </th>
+        <td>{{ service.name }}</td>
+        <td>{{ service.intro }}</td>
+        <td>{{ service.pricing }}</td>
+        <td><a name="view" id="view" class="btn btn-primary" href="{% url 'service-detail' service.slug %}" role="button">View More</a></td>
+      </tr>
+        {% endfor %}
+    </tbody>
+  </table>
 
 {% if is_paginated %}
 

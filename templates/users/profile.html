@@ -8,6 +8,12 @@
     </div>
   </div>
 
+  {% if user.profile.linkedin == None %}
+  <div class="alert alert-warning" role="alert">
+     YOUR PROFILE IS INCOMPLETE. PLEASE FILL OUT THE REMAINING FIELDS INDICATED WITH <strong>None</strong>
+  </div>
+  {% endif %}
+
   <div class="card text-center">
     <div class="card-header">
     
@@ -25,9 +31,34 @@
     <div class="card-body">
       <p class="card-title">EMAIL: {{ user.email }}</p>
       <p class="card-text">
-        {% for profile in profile %}
-        {{ profile.first_name }}
-        {% endfor %}
+        <div class="row">
+          <div class="col-sm-5 col-md-6"><h6>FirstName :</h6></div>
+          <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">{{ user.profile.first_name }}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-5 col-md-6"><h6>LastName :</h6></div>
+          <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">{{ user.profile.last_name }}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-5 col-md-6"><h6>Phone Number :</h6></div>
+          <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">{{ user.profile.phone_number }}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-5 col-md-6"><h6>Birthday :</h6></div>
+          <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">{{ user.profile.date_of_birth }}</div>
+        </div>
+        <div class="text-center">
+          <h4>Social Media Accounts</h4>
+          <p><i class="fab fa-linkedin-in"></i> {{ user.profile.linkedin }}</p>
+          <p><i class="fab fa-facebook"></i>  {{ user.profile.facebook }}</p>
+          <p><i class="fab fa-twitter"></i> {{ user.profile.linkedin }}</p>
+        </div>  
+        <div>
+          <h4>Bio</h4>
+          <p class="lead">
+            {{ user.profile.bio }}
+          </p>
+        </div>          
       </p>
       <a href="{% url 'profile-edit' %}" class="btn btn-dark">Edit Profile</a>
     </div>

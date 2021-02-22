@@ -87,7 +87,7 @@
                 </a>
                 <!-- Dropdown menu -->
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Hire A Freelancer</a></li>
+                  <li><a class="dropdown-item" href="{% url 'service-list' %}">Find Services</a></li>
                   <li><a class="dropdown-item" href="#">Become A Freelancer</a></li>
                   <li><a class="dropdown-item" href="#">Vacancies</a></li>
                 </ul>
@@ -160,12 +160,12 @@
   <div class="mask" style="background-color: rgba(75, 62, 62, 0.6)">
     <div class="d-flex justify-content-center align-items-center h-100">
       <div class="text-white">
-        <h5 class="mb-3">Looking for talent?</h5>
+        <h5 class="mb-3">Looking a Service?</h5>
         <!-- Search Button start -->
         <div class="input-group">
             <div class="form-outline">
-              <form class="navbar-form form-outline" method="GET" action="{% url 'map-results' %}">
-              <input id="search-focus" type="text" id="form1" name="map" class="form-control text-white" />
+              <form class="navbar-form form-outline" method="GET" action="{% url 'service-results' %}">
+              <input id="search-focus" type="text" id="form1" name="service" class="form-control text-white" />
               <label class="form-label" for="form1">Search</label>
             </div>
             <button type="submit" class="btn btn-primary">
@@ -252,6 +252,9 @@
             ZiMaps portal is a place built by Zimbabweans for Zimbabweans to enable the searching & retrieval of any digital maps 
             created by the community for public usage. Here one can find maps in both digital & downloadable format. 
             It also acts as a place for spatial freelancers to showcase their work & get hired.
+          </p>
+          <p>
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ZiMaps</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://africansurveyors.net" property="cc:attributionName" rel="cc:attributionURL">African Surveyors Connect</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/Surveyor-Jr/Zimaps-Portal" rel="dct:source">https://github.com/Surveyor-Jr/Zimaps-Portal</a>.
           </p>
         </div>
         <!--Grid column-->

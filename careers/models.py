@@ -1,9 +1,11 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
-from django.template.defaultfilters import slugify 
+from django.template.defaultfilters import default, slugify 
 from PIL import Image
 from users.models import Profile
+from django_summernote.fields import SummernoteTextField
+
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -15,15 +17,17 @@ class Category(models.Model):
         verbose_name_plural = 'Service Categories'
         ordering = ('name',)
 
+
 class Services(models.Model):
     name = models.CharField(max_length=50)
-    slug = models.SlugField(null=True, blank=True, editable=False)
+    slug = models.SlugField(editable=False, max_length=130)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    intro = models.CharField(max_length=100)
+    intro = models.CharField(max_length=100, unique=True)
     pricing = models.IntegerField()
-    detail = models.TextField()
+    detail = SummernoteTextField()
     image = models.ImageField(default='default.png', upload_to='services')
-    author = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    # author = models.ForeignKey(Profile, on_delete=models.CASCADE) # use self.request.user.id == to get id of current logged in user
+    author  = models.ForeignKey(User, on_delete=models.CASCADE, editable=False, null=True)
 
     def __str__(self):
         return self.name
@@ -33,7 +37,7 @@ class Services(models.Model):
         ordering = ('name',)
 
     def save(self, *args, **kwargs):
-        value = self.name
+        value = self.intro
         self.slug = slugify(value)
         super().save(*args, **kwargs)
 

@@ -1,0 +1,27 @@
+{% extends "careers/base.html" %}
+{% block content %}
+
+
+<div class="card mb-4">
+  <div class="card-body"></div>
+</div>
+
+<form class="form-horizontal " method="POST">
+  {% csrf_token %}
+  <div class="form-group">
+      <legend class="border-bottom mb-4">Delete Service</legend>
+      <h2>You are about to delete "{{ object.name }}"</h2>
+      <h4>Once deleted, this service will no longer appear on this website.</h4>
+    <div class="col-lg-10">
+    </div>
+  </div>
+   <!-- Submit button -->
+   <br>
+   <div class="form-group">
+    <a name="cancel" id="cancel" class="btn btn-outline-dark" data-mdb-ripple-color="dark" href="{% url 'service-detail' object.slug %}" role="button">No, Cancel</a>
+    <button class="btn btn-danger" type="submit">Yes, Delete</button>
+  </div>
+   
+</form>
+
+{% endblock content %}

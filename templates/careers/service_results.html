@@ -1,39 +1,20 @@
 {% extends "careers/base.html" %}
 {% block content %}
 
-<div class="container mb-4">
-    <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-          <span class="navbar-brand mb-0 h1">Find A Service</span>
-        </div>
-      </nav>
-</div>
-
-<div class="row row-cols-1 row-cols-md-3 g-4 mb-2">
-{% for service in services %}
-  <div class="col">
-    <div class="card">
-      <img
-        src="{{ service.image.url }}"
-        class="card-img-top"
-        alt="Service Cover Image"
-      />
-      <div class="card-body">
-        <h5 class="card-title"><a href="{% url 'service-detail' service.slug %}">{{ service.name }}</a></h5>
-        <p class="card-text">
-          {{ service.intro }}
-        </p>
-        <figcaption class="blockquote-footer">
-          <cite title="Source Title"><a href="{% url 'user-services' service.author.username %}">{{ service.author }}</a></cite>
-        </figcaption>
-        <div class="card-footer text-muted">Starting At <i class="fas fa-dollar-sign"></i> {{ service.pricing }}</div>   
-    </div>
-    </div>
+<!-- if there is a muching word within the search -->
+{% if object_list %}
+{% for service in object_list %}
+<div class="card mb-4">
+  <div class="card-body">
+    <h5 class="card-title">{{ service.name }}</h5>
+    <p class="card-text">
+      {{ service.intro }}
+    </p>
+    <a href="{% url 'service-detail' service.slug %}" class="btn btn-primary">View</a>
   </div>
-{% endfor %} 
-  
 </div>
-
+{% endfor %}
+<!-- Pagination buttons start -->
 {% if is_paginated %}
 
         {% if page_obj.has_previous %}
@@ -53,6 +34,17 @@
         <a name="" id="" class="btn btn-primary mb-4" href="#" role="button">Next</a>
         <a name="" id="" class="btn btn-default mb-4" href="?page={{ page_obj.paginator.num_pages }}" role="button">Last</a>
         {% endif %}
+
+    {% endif %}
+<!-- Pagination buttons end -->
+<!-- If there is no much case within the search -->
+{% else %}
+<h3 style="color: rgb(248, 62, 62)">OOPS! NO SERVICES BY THAT NAME!</h3>
+<p>
+    <div class="alert alert-info" role="alert">
+        <strong>Currently there is no-one offfering that. Perhaps its the keyword error?</strong>
+    </div> 
+</p>
 
 {% endif %}
 

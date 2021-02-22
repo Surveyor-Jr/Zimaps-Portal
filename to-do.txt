@@ -16,9 +16,15 @@
     - set up .env file to store all environment variables [done]
     - add google [done-with complications], twitter, github [done-no complications], facebook login system
     - edit and enhance user profile capabilities
-    - create a freelancer app 
+    - create a freelancer app [done]
     - create a resume app 
 
 20-Feb-2021
 
-    -add Biography field to profile model
+    -add Biography field to profile model [done]
+
+22-Feb-2021
+
+    - list & search by category of services
+    - allow viewing of service provider information when user is logged in 
+    - make the intro unique to avoid conflicting slug URLs
