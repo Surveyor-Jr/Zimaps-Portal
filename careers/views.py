@@ -10,7 +10,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-from .models import Services
+from .models import Services, FAQ
 from users.models import Profile
 
 class ServiceListView(ListView):
@@ -21,6 +21,11 @@ class ServiceListView(ListView):
 
 class ServiceDetailView(DetailView):
     model = Services
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ServiceDetailView, self).get_context_data(*args, **kwargs)
+        context['faq'] = FAQ.objects.all() # to fix-->Need to only show FAQ of that service 
+        return context 
 
 class ServiceCreateView(CreateView):
     model = Services

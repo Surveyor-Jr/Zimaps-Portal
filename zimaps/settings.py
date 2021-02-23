@@ -47,7 +47,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['zimaps.herokuapp.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -63,8 +63,8 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'crispy_forms',
     'leaflet',
-    'collector',
-    'careers',
+    'collector.apps.CollectorConfig',
+    'careers.apps.CareersConfig',
     'django_summernote',
     # Social Login
     'django.contrib.sites',
@@ -166,7 +166,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # allows to load iframe from same hostname 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
-
 """
 # configurations for Leaflet Maps
 LEAFLET_CONFIG = {

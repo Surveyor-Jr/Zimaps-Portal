@@ -1,12 +1,9 @@
 from django.contrib import admin
-from .models import Category, Map, COVID, News
+from .models import Category, Map, COVID, News  # Incidents, Provinces, Districts 
 from django_summernote.admin import SummernoteModelAdmin
 # from leaflet.admin import LeafletGeoAdmin
 
-'''
-
-**NOT IN USE FOR NOW**
-
+"""
 class IncidentsAdmin(LeafletGeoAdmin):
     list_display = ['name', 'location']
 
@@ -16,8 +13,7 @@ class ProvincesAdmin(LeafletGeoAdmin):
 class DistrictsAdmin(LeafletGeoAdmin):
     list_display = ['name_2', 'varname_2']
 
-'''
-
+"""
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'description']
 

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Services, Project, Category
+from .models import FAQ, Services, Project, Category
 
 @admin.register(Services)
 class ServicesAdmin(admin.ModelAdmin):
@@ -19,3 +19,9 @@ class ProjectAdmin(admin.ModelAdmin):
     ordering = ('name',)
 
 admin.site.register(Category)
+
+@admin.register(FAQ)
+class FAQAdmin(admin.ModelAdmin):
+    '''Admin view for FAQ's'''
+
+    list_display = ('question', 'answer')

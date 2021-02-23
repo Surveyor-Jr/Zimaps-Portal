@@ -27,7 +27,7 @@ class Services(models.Model):
     detail = SummernoteTextField()
     image = models.ImageField(default='default.png', upload_to='services')
     # author = models.ForeignKey(Profile, on_delete=models.CASCADE) # use self.request.user.id == to get id of current logged in user
-    author  = models.ForeignKey(User, on_delete=models.CASCADE, editable=False, null=True)
+    author  = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name
@@ -57,3 +57,15 @@ class Project(models.Model):
 
     class Meta:
         verbose_name_plural = 'Previous Projects'
+
+class FAQ(models.Model):
+    question = models.CharField(max_length=150, help_text="The possible question that a client could ask you")
+    answer = models.TextField(help_text="The response to the question above")
+    service = models.ForeignKey(Services, on_delete=models.CASCADE, help_text="Which service is this FAQ linked to?")
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.question
+
+    class Meta:
+        verbose_name_plural = 'Frequently Asked Questions'

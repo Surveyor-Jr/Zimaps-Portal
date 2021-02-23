@@ -97,4 +97,35 @@
   </div>
 </div>
 
+<h3 class="mt-4 mb-4">Service FAQ</h3>
+
+<div class="accordion accordion-flush" id="accordionFlushExample">
+  {% for faq in faq %}
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingOne">
+      <button
+        class="accordion-button collapsed"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#flush-collapseOne{{ faq.id }}"
+        aria-expanded="false"
+        aria-controls="flush-collapseOne"
+      >
+        {{ faq.question }}
+      </button>
+    </h2>
+    <div
+      id="flush-collapseOne{{ faq.id }}"
+      class="accordion-collapse collapse"
+      aria-labelledby="flush-headingOne"
+      data-mdb-parent="#accordionFlushExample"
+    >
+      <div class="accordion-body">
+        {{ faq.answer }}
+      </div>
+    </div>
+  </div> 
+  {% endfor %}
+</div>
+
 {% endblock content %}
