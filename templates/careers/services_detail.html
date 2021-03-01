@@ -8,7 +8,7 @@
       {{ object.intro }}
     </p>
     <p class="card-text">
-      <small class="text-muted">Offered By: {{ user.profile }}</small>
+      <small class="text-muted">Offered By: {{ object.author }}</small>
     </p>
     <div class="card-footer text-muted">Starting At <i class="fas fa-dollar-sign"></i> {{ object.pricing }}</div>
   </div>
@@ -43,16 +43,16 @@
   <div class="row g-0">
     <div class="col-md-4">
       <img
-        src="{{ user.profile.image.url }}"
+        src="{{ object.author.profile.image.url }}"
         alt="Profile Picture"
         class="img-fluid"
       />
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h5 class="card-title"><a href="#">{{ user.profile.first_name }} {{ user.profile.last_name }}</a></h5>        
+        <h5 class="card-title"><a href="#">{{ object.author.profile.first_name }} {{ object.author.profile.last_name }}</a></h5>        
         <p class="card-text">
-          {{ user.profile.bio }}
+          {{ object.author.profile.bio }}
         </p>
         <p class="card-text">
           <a name="" id="" class="btn btn-outline-primary" data-mdb-ripple-color="dark" href="#" role="button" data-mdb-toggle="modal"
@@ -81,17 +81,17 @@
         ></button>
       </div>
       <div class="modal-body">
-        <p><i class="fas fa-phone"></i>: <i class="flag flag-zimbabwe"></i>+263-{{ user.profile.phone_number }}</p>
-        <p><i class="far fa-envelope"></i>  {{ user.email }}</p>
-        <p><i class="fab fa-facebook-f">  <a href="{{ user.profile.facebook }}" target="_blank" rel="noopener noreferrer">{{ user.profile.facebook }}</a></i></p>
-        <p><i class="fab fa-linkedin-in"></i>  <a href="{{ user.profile.linkedin }}" target="_blank" rel="noopener noreferrer">{{ user.profile.linkedin }}</a></p>
-        <p><i class="fab fa-twitter"></i>  <a href="https://twitter.com/{{ user.profile.twitter }}" target="_blank" rel="noopener noreferrer">{{ user.profile.twitter }}</a></p>
+        <p><i class="fas fa-phone"></i>: <i class="flag flag-zimbabwe"></i>+263-{{ object.author.profile.phone_number }}</p>
+        <p><i class="far fa-envelope"></i>  {{ object.author.email }}</p>
+        <p><i class="fab fa-facebook-f">  <a href="{{ object.author.profile.facebook }}" target="_blank" rel="noopener noreferrer">{{ object.author.profile.facebook }}</a></i></p>
+        <p><i class="fab fa-linkedin-in"></i>  <a href="{{ object.author.profile.linkedin }}" target="_blank" rel="noopener noreferrer">{{ object.author.profile.linkedin }}</a></p>
+        <p><i class="fab fa-twitter"></i>  <a href="https://twitter.com/{{object.author.profile.twitter }}" target="_blank" rel="noopener noreferrer">{{ object.author.profile.twitter }}</a></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-success" data-mdb-dismiss="modal">
           Close
         </button>
-        <a href="tel:{{ user.profile.phone_number }}" type="button" class="btn btn-primary">Call Now<i class="fas fa-phone"></i></a>
+        <a href="tel:{{ object.author.profile.phone_number }}" type="button" class="btn btn-primary">Call Now<i class="fas fa-phone"></i></a>
       </div>
     </div>
   </div>
