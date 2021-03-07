@@ -26,11 +26,15 @@
 22-Feb-2021
 
     - list & search by category of services
-    - allow viewing of service provider information when user is logged in 
+    - allow viewing of service provider information when user is logged in ONLY [done]
     - make the intro unique to avoid conflicting slug URLs
 
 23-Feb-2021
 
-    - service providers ability to add FAQ section for their clients to learn more
+    - service providers ability to add FAQ section for their clients to learn more [done]
     - section to display related services
     - section to display more services offered by that author within a service detail view 
+
+02-Mar-2021
+
+    - add related maps below the detail. 

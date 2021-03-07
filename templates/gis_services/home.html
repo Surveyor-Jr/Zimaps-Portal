@@ -1,0 +1,26 @@
+{% extends "gis_services/base.html" %}
+{% block content %}
+
+<div class="container">
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <span class="navbar-brand mb-0 h1">Find A Primary School</span>
+        </div>
+      </nav>
+</div>
+
+<div id="map"></div>
+
+<script>
+  var map = L.map('map').setView([-19.813164, 31.52652], 8);
+
+  L.esri.basemapLayer('Streets').addTo(map);
+
+  // a Leaflet marker is used by default to symbolize point features.
+  L.esri.featureLayer({
+    url: 'https://services5.arcgis.com/NgEZxUBTjamoxmWv/arcgis/rest/services/Zim_Schools/FeatureServer/0'
+  }).addTo(map);
+</script>
+
+
+{% endblock content %}

@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'leaflet',
     'collector.apps.CollectorConfig',
     'careers.apps.CareersConfig',
+    'gis_services.apps.GisServicesConfig',
     'django_summernote',
     # Social Login
     'django.contrib.sites',

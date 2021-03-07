@@ -1,3 +1,4 @@
+from careers.models import Category as career_category
 from django.http.response import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView
@@ -14,7 +15,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-from .models import COVID, News,  Map
+from .models import COVID, News,  Map, Category
 
 class MapListView(ListView):
     model = Map
@@ -22,6 +23,11 @@ class MapListView(ListView):
     context_object_name = 'maps'
     paginate_by = 10 # display 10 results on a single page
     ordering = '-name'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['category'] = Category.objects.all() 
+        return context
 
 class UserMapListView(ListView):
     model = Map
@@ -35,6 +41,18 @@ class UserMapListView(ListView):
 
 class MapDetailView(DetailView):
     model = Map
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['category'] = Category.objects.all() 
+        return context
+
+    # the related maps within the same category
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['related'] = Map.objects.all()
+        return context 
+    
 
 class MapCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Map

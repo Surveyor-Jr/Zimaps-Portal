@@ -40,6 +40,7 @@ urlpatterns = [
     path('', include('collector.urls')),
     # path('profile/', include('users.urls')),
     path('careers/', include('careers.urls')),
+    path('gis-services', include('gis_services.urls')),
     path('editor/', include('django_summernote.urls')),
 ]
 

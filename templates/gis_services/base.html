@@ -8,11 +8,49 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>ZiMaps </title>
+    <title>ZiMaps - GIS Services</title>
     <meta name="description" content="ZiMaps portal is a place built by Zimbabweans for Zimbabweans to enable the searching & retrieval of any digital maps created by the community for public usage. Here one can find maps in both digital & downloadable format. It also acts as a place for spatial freelancers to showcase their work & get hired." />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" href="https://blog.justlanded.com/wp-content/uploads/2018/01/zimbabwe-1758992_1280.png">
     <!-- MDBootstrap CDN for the UI Kit -->
+
+     <!-- Load Leaflet from CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+  crossorigin=""></script>
+
+<!-- Load Esri Leaflet from CDN -->
+<script src="https://unpkg.com/esri-leaflet@2.5.3/dist/esri-leaflet.js"
+  integrity="sha512-K0Vddb4QdnVOAuPJBHkgrua+/A9Moyv8AQEWi0xndQ+fqbRfAFd47z4A9u1AW/spLO0gEaiE1z98PK1gl5mC5Q=="
+  crossorigin=""></script>
+
+<!-- Load Esri Leaflet Geocoder from CDN -->
+<link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.3.3/dist/esri-leaflet-geocoder.css"
+  integrity="sha512-IM3Hs+feyi40yZhDH6kV8vQMg4Fh20s9OzInIIAc4nx7aMYMfo+IenRUekoYsHZqGkREUgx0VvlEsgm7nCDW9g=="
+  crossorigin="">
+<script src="https://unpkg.com/esri-leaflet-geocoder@2.3.3/dist/esri-leaflet-geocoder.js"
+  integrity="sha512-HrFUyCEtIpxZloTgEKKMq4RFYhxjJkCiF5sDxuAokklOeZ68U2NPfh4MFtyIVWlsKtVbK5GD2/JzFyAfvT5ejA=="
+  crossorigin=""></script>
+
+<style>
+  body { margin:0; padding:0; }
+  #map-wrapper {
+    position: relative; }
+  
+  #map {
+    border-top: 1px solid #e5eaee;
+    height: 500px;
+    width: 100%;
+    position: relative;
+    left: 0;
+    right: 0; }
+    #map a {
+      padding-bottom: 0; }
+</style>
+
     <!-- Font Awesome -->
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
@@ -151,21 +189,22 @@
         <div class="container-fluid">
 
             <!-- Background image & Search Start -->
-  <div class="p-5 text-center bg-image mb-4"
+  <div
+  class="p-5 text-center bg-image"
   style="
-    background-image: url('https://princetonmontessori.org/wp-content/uploads/2017/09/careers_main_image.jpg');
+    background-image: url('https://mdbootstrap.com/img/new/slides/041.jpg');
     height: 200px;
     margin-top: 58px;
   ">
   <div class="mask" style="background-color: rgba(75, 62, 62, 0.6)">
     <div class="d-flex justify-content-center align-items-center h-100">
       <div class="text-white">
-        <h5 class="mb-3">Looking a Service?</h5>
+        <h5 class="mb-3">Looking for a map?</h5>
         <!-- Search Button start -->
         <div class="input-group">
             <div class="form-outline">
-              <form class="navbar-form form-outline" method="GET" action="{% url 'service-results' %}">
-              <input id="search-focus" type="text" id="form1" name="service" class="form-control text-white" />
+              <form class="navbar-form form-outline" method="GET" action="{% url 'map-results' %}">
+              <input id="search-focus" type="text" id="form1" name="map" class="form-control text-white" />
               <label class="form-label" for="form1">Search</label>
             </div>
             <button type="submit" class="btn btn-primary">
@@ -214,19 +253,9 @@
                         <li class="list-group-item list-group-item-light"><h3>Categories</h3>
                             <ul>
                               {% for cat in category %}
-                                <li><a href="{% url 'category-services' cat.name %}">{{ cat.name }}</a></li>
+                                <li><a href="#">{{ cat.name }}</a></li>
                               {% endfor %}
-                                
                             </ul>
-                        </li>
-                      {% endif %}
-                      {% if services %}
-                      <li class="list-group-item list-group-item-light"><h3>Related Services</h3>
-                        <ul>
-                          {% for service in services %}
-                            <li> <a href="{% url 'service-detail' service.slug %}">{{ service.name }}</a> </li> 
-                          {% endfor %}                             
-                        </ul>
                         </li>
                       {% endif %}
                         <li class="list-group-item list-group-item-light"><h3>Vacancies</h3>
@@ -234,6 +263,13 @@
                               <li>Vacancy Here</li>                              
                           </ul>
                       </li>
+                      <li class="list-group-item list-group-item-light"><h3>Ad</h3>
+                        <img
+                            src="https://image.shutterstock.com/image-photo/success-internet-banner-advertisement-text-260nw-123729361.jpg"
+                            class="img-thumbnail"
+                            alt="Paid Advertising"
+                            />
+                    </li>
                       <li class="list-group-item list-group-item-light"><h3>BucketList</h3>
                         <ul>
                             <li>A list of maps that have been suggested by some users</li>                            

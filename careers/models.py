@@ -61,7 +61,7 @@ class Project(models.Model):
 class FAQ(models.Model):
     question = models.CharField(max_length=150, help_text="The possible question that a client could ask you")
     answer = models.TextField(help_text="The response to the question above")
-    service = models.ForeignKey(Services, on_delete=models.CASCADE, help_text="Which service is this FAQ linked to?")
+    service = models.ForeignKey(Services, on_delete=models.CASCADE, related_name='faq_service', help_text="Which service is this FAQ linked to?")
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):

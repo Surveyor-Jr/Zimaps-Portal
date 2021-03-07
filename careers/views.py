@@ -10,7 +10,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-from .models import Services, FAQ
+from .models import Category, Services, FAQ
 from users.models import Profile
 
 class ServiceListView(ListView):
@@ -19,13 +19,21 @@ class ServiceListView(ListView):
     context_object_name = 'services'
     paginate_by = 20
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['category'] = Category.objects.all()
+        return context 
+
 class ServiceDetailView(DetailView):
     model = Services
 
     def get_context_data(self, *args, **kwargs):
-        context = super(ServiceDetailView, self).get_context_data(*args, **kwargs)
-        context['faq'] = FAQ.objects.all() # to fix-->Need to only show FAQ of that service 
+        context = super().get_context_data(*args, **kwargs)
+        context['faq'] = FAQ.objects.filter(service=self.object) # FAQ of the current service
+        context['services'] = Services.objects.all()[:10] # limited to only display 10 items
+        context['category'] = Category.objects.all() # the list of available categories
         return context 
+  
 
 class ServiceCreateView(CreateView):
     model = Services
@@ -81,6 +89,16 @@ class UserServices(ListView):
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         return Services.objects.filter(author=user).order_by('-name')
+
+class CategoryServices(ListView):
+    model = Services
+    template_name = 'careers/service_in_category.html'
+    context_object_name = 'services'
+    paginate_by = 20
+
+    def get_queryset(self):
+        category = get_object_or_404(Category, name=self.kwargs.get('name'))
+        return Services.objects.filter(category=category)
         
 
 

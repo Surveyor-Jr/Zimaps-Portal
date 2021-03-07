@@ -3,11 +3,11 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <div class="card">
+      <div class="card mb-4">
         <div class="card-body">
           <h5 class="card-title">{{ object.name }}</h5>
           <div class="article-metadata">
-            Category: <span class="badge bg-dark">{{ object.category }}</span><br />
+            Category: <span class="badge bg-dark">{{ object.category }}</span><br/>
             Credits:
             <span class=""><strong><a href="{% url 'user-maps' map.author.username %}">{{ object.author }}</a></strong></span>
           </div>
@@ -53,6 +53,23 @@
         </div>
       </div>
     </div>
+    <h5>You might also be interested in</h5>
+    <!-- related maps -->
+    <div class="row">
+      {% for related in related %}
+  <div class="col-sm-6 mb-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ related.name }}</h5>
+        <p class="card-text">
+          {{ related.description|truncatewords:10 }}
+        </p>
+        <a href="#" class="btn btn-primary">View</a>
+      </div>
+    </div>
+  </div>
+      {% endfor %}  
+</div>
   </div>
 </div>
 

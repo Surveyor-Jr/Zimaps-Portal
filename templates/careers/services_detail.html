@@ -14,7 +14,7 @@
   </div>
   <div class="text-center">
   <img
-    src="{{ services.image.url }}"
+    src="{{ object.image.url }}"
     class=""
     height="300"
     width="75%"
@@ -63,6 +63,8 @@
   </div>
 </div>
 <!-- Modal -->
+<!-- Only Show Information to registered users -->
+{% if user.is_authenticated %}
 <div
   class="modal fade"
   id="exampleModal"
@@ -96,8 +98,48 @@
     </div>
   </div>
 </div>
+<!-- Is user is not logged in -->
+{% else %}
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Not Authorised</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-mdb-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        We only display personal information to users who are currently logged in. 
+        <p>If you do not have an account, you can <a href="{% url 'register' %}">Create An Account</a> in order to view this service providers information
+        </p>
+        <h3 class="text-center">OR</h3>
+        <p>If you already have an account, click the <strong>Login</strong> button</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
+          Close
+        </button>
+        <a name="login" id="login" class="btn btn-primary" href="{% url 'login' %}" role="button">Login</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
 
 <h3 class="mt-4 mb-4">Service FAQ</h3>
+<p class="lead note note-light">The service provider has provided some of the frequently asked questions below which might be helpful before ordering
+  for their services. 
+</p>
 
 <div class="accordion accordion-flush" id="accordionFlushExample">
   {% for faq in faq %}
@@ -111,7 +153,7 @@
         aria-expanded="false"
         aria-controls="flush-collapseOne"
       >
-        {{ faq.question }}
+        <strong>{{ faq.question }}</strong>
       </button>
     </h2>
     <div

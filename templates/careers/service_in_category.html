@@ -1,0 +1,58 @@
+{% extends "careers/base.html" %}
+{% block content %}
+
+<div class="container mb-4">
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <span class="navbar-brand mb-0 h1">Services in: {{ view.kwargs.name }} ({{ page_obj.paginator.count }})</span>
+        </div>
+      </nav>
+</div>
+
+<table class="table">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Brief</th>
+        <th scope="col">Price</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for service in services %}
+      <tr>
+        <th scope="row"><i class="fas fa-toolbox"></i>
+        </th>
+        <td>{{ service.name }}</td>
+        <td>{{ service.intro }}</td>
+        <td>{{ service.pricing }}</td>
+        <td><a name="view" id="view" class="btn btn-primary" href="{% url 'service-detail' service.slug %}" role="button">View More</a></td>
+      </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+
+{% if is_paginated %}
+
+        {% if page_obj.has_previous %}
+        <a name="First" id="First" class="btn btn-default" href="?page=1" role="button">First</a>
+        <a name="Previous" id="Previous" class="btn btn-default" href="?page={{ page_obj.previous_page_number }}" role="button">Previous</a>        
+        {% endif %}
+            
+        {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+        <a name="" id="" class="btn btn-info mb-4" href="?page={{ num }}" role="button">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        <a name="" id="" class="btn btn-default mb-4" href="?page={{ num }}" role="button">{{ num }}</a>
+        {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+        <a name="" id="" class="btn btn-primary mb-4" href="#" role="button">Next</a>
+        <a name="" id="" class="btn btn-default mb-4" href="?page={{ page_obj.paginator.num_pages }}" role="button">Last</a>
+        {% endif %}
+
+{% endif %}
+
+{% endblock content %}
